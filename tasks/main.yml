@@ -1,9 +1,11 @@
 ---
-- name: Include OS Specific setup tasks
-  include: setup-{{ ansible_os_family }}.yml
+- include: setup-RedHat.yml
+  when: ansible_os_family == 'RedHat'
+
+- include: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
 
 - include: config.yml
-- include: ssl.yml
 - include: plugins.yml
 
 - name: Ensure Logstash is started and enabled on boot.
